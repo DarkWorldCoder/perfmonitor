@@ -28,6 +28,7 @@ socket.on("connect",()=>{
 
     let perfDataInterval = setInterval(()=>{
         performanceData().then((allPerformanceData)=>{
+            allPerformanceData.macA = macA
             socket.emit("perfData",allPerformanceData)
         })
 
@@ -62,7 +63,8 @@ function performanceData(){
         //  - Clock Speed
         const cpuSpeed = cpus[0].speed
         const cpuLoad = await getCpuLoad();
-        resolve({freeMem,totalMem,usedMem,memUseage,osType,upTime,cpuModel,numCores,cpuSpeed,cpuLoad})
+        const isActive = true
+        resolve({freeMem,totalMem,usedMem,memUseage,osType,upTime,cpuModel,numCores,cpuSpeed,cpuLoad,isActive})
     })
 }
 
